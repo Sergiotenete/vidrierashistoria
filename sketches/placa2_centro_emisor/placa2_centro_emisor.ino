@@ -19,8 +19,8 @@ const uint32_t TOUCH_DEBOUNCE_MS = 1200;
 
 // ============================ RED / ESP-NOW ===================================
 // Reemplaza por MAC reales de Placa 1 y Placa 3.
-uint8_t MAC_IZQUIERDA[6] = {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0x01};
-uint8_t MAC_DERECHA[6]   = {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0x02};
+uint8_t MAC_IZQUIERDA[6] = {0x48, 0x9D, 0x31, 0xC0, 0x50, 0x20};
+uint8_t MAC_DERECHA[6]   = {0x1C, 0xC3, 0xAB, 0xD2, 0x92, 0x1C}; 
 
 struct __attribute__((packed)) CommandMessage {
   uint8_t command;
