@@ -11,6 +11,17 @@ Proyecto de 3 ESP32-WROOM con tiras WS2812B (100 LEDs por cuadro) y disparo por 
 - **Placa 3 - Derecha, Receptor**  
   `sketches/placa3_derecha_receptor/placa3_derecha_receptor.ino`
 
+## Versión individual (sin ESP-NOW)
+
+- **Placa 2 - Centro, Individual / Autónoma**  
+  `sketches/placa2_centro_individual/placa2_centro_individual.ino`
+
+Versión standalone de la placa central para usarse sola, sin las placas
+Izquierda/Derecha. No usa WiFi ni ESP-NOW: al tocar el sensor táctil
+ejecuta su propia animación de inmediato (sin los retardos de 3s/6s,
+ya que no hay nada que coordinar con otras placas). Útil para pruebas
+de banco o para montajes donde solo se necesita el cuadro central.
+
 ## Comportamiento
 
 Al tocar el sensor en la placa central:
