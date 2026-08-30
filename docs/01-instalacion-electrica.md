@@ -10,7 +10,7 @@ Instalación de **una sola obra** iluminada con **100 LED WS2812B**, gobernada p
 | Concepto | Cálculo | Resultado |
 |---|---|---|
 | Consumo teórico máximo (100 LED en blanco pleno) | 100 × 60 mA | **6,0 A** |
-| Consumo real con arcoíris a brillo 180/255 | ~100 × 22 mA | **~2,2 A** |
+| Consumo real con arcoíris a brillo 150/255 | ~100 × 18 mA | **~1,8 A** |
 | ESP32 (con radio apagada) | — | **~0,08 A** |
 | Techo impuesto por el firmware (`MAX_MILIAMPERIOS`) | — | **6,0 A** |
 | Fuente | 5 V × 10 A | **50 W** |
@@ -187,6 +187,9 @@ Secciones para tiradas de hasta 3 m:
    Corta por las marcas de corte y sobra lo que no uses.
 4. **Fija con el perfil, no solo con el adhesivo de la tira.** El adhesivo 3M cede con
    el calor y el paso de los meses, sobre todo en vertical.
+   **Nada de silicona acética** (la que huele a vinagre) en contacto con la tira: al
+   curar libera ácido acético y corroe el marco plateado de los WS2812B. Silicona
+   neutra, o ninguna. Ver [05-vida-util-de-los-leds.md](05-vida-util-de-los-leds.md).
 5. **Humedad.** Si la obra está en un templo, un sótano o cerca de un muro exterior,
    usa tira **IP65** y monta la caja de conexiones fuera de la zona de condensación.
 6. **Caja de conexiones ventilada.** Nunca hermética: la fuente necesita disipar sus
@@ -207,7 +210,10 @@ Antes de dar tensión, con la fuente desconectada de la red:
 
 Primer arranque:
 
-1. Ajusta la fuente a **5,0-5,1 V** con el potenciómetro y un multímetro, sin carga.
+1. Ajusta la fuente a **5,00-5,05 V** con el potenciómetro y un multímetro. Compruébalo
+   luego **con la obra encendida**: muchas fuentes conmutadas dan de más en vacío. No
+   subas la tensión para compensar la caída de la tira; eso somete a los 100 LED a
+   sobretensión permanente. La caída se corrige con cobre (§6), no con voltios.
 2. Da tensión con el conmutador en **OFF**. La tira debe quedarse apagada.
 3. Pasa el conmutador a **ON**: 3 s de fundido de entrada y arcoíris en movimiento.
 4. Con la obra encendida, mide la tensión **al final de la tira**: si baja de 4,6 V,

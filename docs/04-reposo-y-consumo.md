@@ -102,7 +102,12 @@ Con la obra encendida 8 h al día, las 16 h restantes en reposo suponen unos
 de raíl. Menos de un euro de diferencia al año.
 
 **Conclusión honesta: si la instalación va enchufada a la red, el reposo no se
-justifica por la factura.** Se justifica por estas otras razones:
+justifica por la factura.** Y si lo que buscas es que los LED y la placa duren, tampoco
+es la palanca adecuada: un LED alimentado pero apagado no envejece, y el deep sleep
+añade arranques en frío a la placa. Eso está desarrollado en
+[05-vida-util-de-los-leds.md](05-vida-util-de-los-leds.md).
+
+El reposo se justifica por estas otras razones:
 
 - **Alimentación por batería o panel solar.** Ahí es decisivo, no opcional.
 - **Menos calor** en la caja de conexiones, si está poco ventilada o empotrada.

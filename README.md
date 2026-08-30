@@ -27,6 +27,7 @@ docs/
   02-esp32-24-7.md              opciones para tenerlo siempre encendido sin que sufra
   03-firmware-y-ajustes.md      grabación, parámetros y averías habituales
   04-reposo-y-consumo.md        standby del ESP32 (light/deep sleep) y consumo real
+  05-vida-util-de-los-leds.md   qué envejece a los WS2812B y qué hacer al respecto
 ```
 
 ### Arranque rápido

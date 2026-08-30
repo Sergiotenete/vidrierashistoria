@@ -70,7 +70,7 @@ Todo lo que se toca en obra está en un único fichero.
 
 | Parámetro | Por defecto | Qué hace |
 |---|---|---|
-| `BRILLO_MAXIMO` | `180` | Brillo de la obra a plena luz (0-255). Es el ajuste estético principal |
+| `BRILLO_MAXIMO` | `150` | Brillo de la obra a plena luz (0-255). Ajuste estético principal y el que más influye en la vida de los LED (doc 05) |
 | `FADE_IN_MS` | `3000` | Duración del fundido de entrada, en milisegundos |
 | `FADE_OUT_MS` | `4000` | Duración del fundido de salida |
 | `VELOCIDAD_ARCOIRIS` | `40` | Velocidad del color. 40 → ciclo completo cada ~16 s. Bájalo a 15-20 para un ritmo más contemplativo |
@@ -92,6 +92,7 @@ Todo lo que se toca en obra está en un único fichero.
 | `USAR_CORTE_ALIMENTACION` | `0` | Relé/MOSFET de lado alto sobre el +5 V de la tira (ver doc 02, opción C) |
 | `MODO_REPOSO` | `0` | `0` sin reposo · `1` light sleep · `2` deep sleep (ver doc 04) |
 | `RETARDO_REPOSO_MS` | `2000` | Tiempo con la obra apagada antes de dormirse |
+| `APAGADO_AUTOMATICO_H` | `0` | Horas de encendido continuo tras las que la obra se apaga sola. `0` = desactivado. La medida más eficaz para alargar la vida de los LED (doc 05) |
 | `FRECUENCIA_CPU_MHZ` | `0` | `0` = 240 MHz. Ponlo a `80` para menos calor; vuelve a `0` si aparece parpadeo |
 | `DESACTIVAR_RADIO` | `1` | Apaga WiFi y Bluetooth |
 | `WDT_SEGUNDOS` | `8` | Watchdog: reinicia la placa si el firmware se cuelga |
@@ -114,3 +115,4 @@ Todo lo que se toca en obra está en un único fichero.
 | Con `MODO_REPOSO 1`, la tira no responde tras el primer reposo | El light sleep ha dejado el periférico RMT en estado indefinido | Usa `MODO_REPOSO 2` (doc 04) |
 | Con `MODO_REPOSO 2`, la obra se enciende sola de vez en cuando | Ruido en el cable del conmutador despertando al ESP32 | Pull-up externo de 10 kΩ + 100 nF (doc 01, §5) |
 | El firmware no compila: «debe ser un GPIO del dominio RTC» | Deep sleep con un pin de conmutador sin dominio RTC | Usa 0, 2, 4, 12-15, 25-27 o 32-39 |
+| La obra se apagó sola y no responde al conmutador | `APAGADO_AUTOMATICO_H` ha llegado a su límite | Es lo esperado: pasa el conmutador por OFF y vuelve a ON |

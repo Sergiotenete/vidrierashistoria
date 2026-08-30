@@ -37,9 +37,12 @@
 // Techo de consumo que FastLED nunca sobrepasa. 6000 mA deja la fuente
 // trabajando al ~60 % de su capacidad: menos calor, mucha más vida útil.
 #define MAX_MILIAMPERIOS      6000
-// Brillo máximo de la obra (0-255). 180 es luminoso de sobra para una vidriera
-// y alarga la vida de la tira. Súbelo solo si el espacio está muy iluminado.
-#define BRILLO_MAXIMO         180
+// Brillo máximo de la obra (0-255). Es el ajuste que más influye en la vida de
+// los LED: la temperatura de unión es lo que los envejece, y el brillo es lo que
+// la determina. De 180 a 150 la obra se ve un 11 % más tenue al ojo, pero
+// disipa un 17 % menos de calor. Sube a 180-200 solo si el espacio está muy
+// iluminado y asume el coste en vida útil. Ver docs/05-vida-util-de-los-leds.md.
+#define BRILLO_MAXIMO         150
 
 // ---------------------------------------------------------------------------
 // 4. FUNDIDOS
@@ -113,3 +116,19 @@
 // Con MODO_REPOSO 2 puedes bajar ESPERA_ARRANQUE_MS a ~150: al despertar la
 // obra arranca siempre desde negro, así que no hay pico de corriente que
 // amortiguar y se recorta el retardo perceptible.
+
+// ---------------------------------------------------------------------------
+// 9. APAGADO AUTOMÁTICO POR HORAS
+// ---------------------------------------------------------------------------
+// Horas de encendido continuo tras las cuales la obra se apaga sola, con su
+// fundido de salida normal. 0 = desactivado.
+//
+// Es la medida más eficaz para que los LED no sufran con el tiempo: el desgaste
+// de un LED se cuenta en horas encendido, así que evitar que la obra se quede
+// encendida toda una noche o un fin de semana por olvido vale más que cualquier
+// otro ajuste de este fichero.
+//
+// El conmutador sigue mandando: tras el apagado automático hay que pasarlo por
+// OFF y volver a ON para encender de nuevo. Así un conmutador olvidado en ON no
+// vuelve a encender la obra por su cuenta.
+#define APAGADO_AUTOMATICO_H  0
