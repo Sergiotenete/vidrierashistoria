@@ -12,7 +12,8 @@ está encendida.
 - Fuente: **5 V / 10 A**, trabajando por debajo del 60 % de su capacidad.
 - El ESP32 permanece **encendido de forma permanente**; el conmutador es una señal, no
   un corte de corriente — por eso el fundido de salida puede completarse.
-- Consumo en reposo con la obra apagada: **~0,9 W**.
+- Consumo en reposo con la obra apagada: **~0,9 W**, reducible a ~0,1 W con el
+  reposo del ESP32 y el corte del raíl de la tira ([doc 04](docs/04-reposo-y-consumo.md)).
 
 ### Estructura
 
@@ -25,6 +26,7 @@ docs/
   01-instalacion-electrica.md   materiales, esquema, cableado y montaje
   02-esp32-24-7.md              opciones para tenerlo siempre encendido sin que sufra
   03-firmware-y-ajustes.md      grabación, parámetros y averías habituales
+  04-reposo-y-consumo.md        standby del ESP32 (light/deep sleep) y consumo real
 ```
 
 ### Arranque rápido

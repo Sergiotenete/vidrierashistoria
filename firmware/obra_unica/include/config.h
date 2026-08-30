@@ -82,3 +82,34 @@
 // 80 = menos consumo y menos calor. Si aparece parpadeo, vuelve a 0.
 #define FRECUENCIA_CPU_MHZ    0
 #define DESACTIVAR_RADIO      1        // apaga WiFi y Bluetooth (no se usan)
+
+// ---------------------------------------------------------------------------
+// 8. REPOSO DEL ESP32 (standby hasta recibir la señal del conmutador)
+// ---------------------------------------------------------------------------
+// 0 = SIN REPOSO. El ESP32 sigue ejecutando con la obra apagada (por defecto).
+//     Respuesta instantánea, consola serie siempre disponible.
+//
+// 1 = LIGHT SLEEP. Se duerme al terminar el fundido de salida y despierta por
+//     nivel en PIN_CONMUTADOR REANUDANDO la ejecución donde la dejó. El chip
+//     baja a ~1 mA y el despertar es inmediato.
+//     ATENCIÓN: hay que verificarlo en tu placa. El ESP32 puede perder la
+//     configuración del periférico RMT que FastLED usa para la tira, y FastLED
+//     no ofrece una forma limpia de reinicializarlo. Si tras el primer ciclo
+//     de reposo la tira no responde o muestra basura, usa el modo 2.
+//
+// 2 = DEEP SLEEP. El chip baja a ~10 µA, pero al despertar la placa REARRANCA
+//     desde setup(). Es la opción fiable: el rearranque deja todos los
+//     periféricos limpios. Coste: ~0,3-0,5 s desde que accionas el conmutador
+//     hasta que empieza el fundido de entrada.
+//     Requiere que PIN_CONMUTADOR sea un GPIO del dominio RTC
+//     (0, 2, 4, 12-15, 25-27, 32-39). El 27 por defecto lo es.
+#define MODO_REPOSO           0
+
+// Tiempo que la obra debe llevar apagada antes de que el ESP32 se duerma.
+// Además de dar margen para grabar firmware, hace que un despertar espurio
+// (ruido en un cable largo hasta el conmutador) vuelva solo al reposo.
+#define RETARDO_REPOSO_MS     2000
+
+// Con MODO_REPOSO 2 puedes bajar ESPERA_ARRANQUE_MS a ~150: al despertar la
+// obra arranca siempre desde negro, así que no hay pico de corriente que
+// amortiguar y se recorta el retardo perceptible.

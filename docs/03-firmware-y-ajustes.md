@@ -90,6 +90,8 @@ Todo lo que se toca en obra está en un único fichero.
 | `SATURACION` | `255` | Bájalo a 200-230 si quieres una luz más pastel que deje leer mejor el vidrio |
 | `APLICAR_GAMMA_FADE` | `1` | Corrección perceptual del fundido. Déjalo a `1` |
 | `USAR_CORTE_ALIMENTACION` | `0` | Relé/MOSFET de lado alto sobre el +5 V de la tira (ver doc 02, opción C) |
+| `MODO_REPOSO` | `0` | `0` sin reposo · `1` light sleep · `2` deep sleep (ver doc 04) |
+| `RETARDO_REPOSO_MS` | `2000` | Tiempo con la obra apagada antes de dormirse |
 | `FRECUENCIA_CPU_MHZ` | `0` | `0` = 240 MHz. Ponlo a `80` para menos calor; vuelve a `0` si aparece parpadeo |
 | `DESACTIVAR_RADIO` | `1` | Apaga WiFi y Bluetooth |
 | `WDT_SEGUNDOS` | `8` | Watchdog: reinicia la placa si el firmware se cuelga |
@@ -109,3 +111,6 @@ Todo lo que se toca en obra está en un único fichero.
 | El conmutador actúa al revés | Cableado invertido | `CONMUTADOR_INVERTIDO 1` |
 | El conmutador cambia solo | Ruido en un cable largo | Pull-up externo de 10 kΩ + 100 nF, cable apantallado |
 | El fundido de salida no llega a verse | El conmutador está cortando la alimentación | Es la topología B; recablea como topología A (doc 01, §5) |
+| Con `MODO_REPOSO 1`, la tira no responde tras el primer reposo | El light sleep ha dejado el periférico RMT en estado indefinido | Usa `MODO_REPOSO 2` (doc 04) |
+| Con `MODO_REPOSO 2`, la obra se enciende sola de vez en cuando | Ruido en el cable del conmutador despertando al ESP32 | Pull-up externo de 10 kΩ + 100 nF (doc 01, §5) |
+| El firmware no compila: «debe ser un GPIO del dominio RTC» | Deep sleep con un pin de conmutador sin dominio RTC | Usa 0, 2, 4, 12-15, 25-27 o 32-39 |
