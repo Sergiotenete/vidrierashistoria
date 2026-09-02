@@ -4,8 +4,8 @@ Instalaciones lumínicas para vidrieras históricas.
 
 ## Obra única — 100 LED WS2812B con conmutador on/off
 
-Instalación de una sola obra iluminada por detrás con una tira de 100 LED WS2812B
-gobernada por un ESP32. Un conmutador on/off enciende y apaga la pieza con **fundido de
+Instalación de una sola obra —construida con cartulina y PVC transparente de colores—
+iluminada por detrás con una tira de 100 LED WS2812B gobernada por un ESP32. Un conmutador on/off enciende y apaga la pieza con **fundido de
 entrada y fundido de salida**, mostrando un **arcoíris en movimiento continuo** mientras
 está encendida.
 
@@ -28,6 +28,7 @@ docs/
   03-firmware-y-ajustes.md      grabación, parámetros y averías habituales
   04-reposo-y-consumo.md        standby del ESP32 (light/deep sleep) y consumo real
   05-vida-util-de-los-leds.md   qué envejece a los WS2812B y qué hacer al respecto
+  06-montaje-cartulina-pvc.md   disipación, difusión y color a través de PVC
 ```
 
 ### Arranque rápido

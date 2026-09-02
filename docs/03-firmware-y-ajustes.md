@@ -87,7 +87,7 @@ Todo lo que se toca en obra está en un único fichero.
 | `ANTIRREBOTE_MS` | `60` | Súbelo si el conmutador es viejo o el cable es largo |
 | `MAX_MILIAMPERIOS` | `6000` | Techo de consumo. No pasar de 8000 con la fuente de 10 A |
 | `EXTENSION_ARCOIRIS` | `2` | `1` degradado muy suave · `3` un arcoíris completo en la obra |
-| `SATURACION` | `255` | Bájalo a 200-230 si quieres una luz más pastel que deje leer mejor el vidrio |
+| `SATURACION` | `190` | Clave con PVC de color: un filtro resta, así que la luz muy saturada apaga paneles enteros (doc 06) |
 | `APLICAR_GAMMA_FADE` | `1` | Corrección perceptual del fundido. Déjalo a `1` |
 | `USAR_CORTE_ALIMENTACION` | `0` | Relé/MOSFET de lado alto sobre el +5 V de la tira (ver doc 02, opción C) |
 | `MODO_REPOSO` | `0` | `0` sin reposo · `1` light sleep · `2` deep sleep (ver doc 04) |

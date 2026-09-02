@@ -62,7 +62,14 @@
 // Salto de tono entre LED contiguos. Con 100 LED: 1 = degradado muy suave,
 // 3 = un arcoíris completo repartido a lo largo de la obra.
 #define EXTENSION_ARCOIRIS    2
-#define SATURACION            255      // 255 = colores plenos; 200-230 = más pastel
+// Saturación de la luz. Con PVC o acetato de color por delante, un filtro RESTA:
+// un panel rojo no deja pasar el verde, así que con luz muy saturada los paneles
+// se apagan por turnos y la obra parpadea en vez de fundirse. Una luz menos
+// saturada lleva algo de todas las longitudes de onda y todos los paneles
+// transmiten la suya. 190 es un punto de partida para PVC de colores; sube hacia
+// 255 si quieres que se enciendan por turnos a propósito, baja hacia 150 para un
+// brillo parejo. Ver docs/06-montaje-cartulina-pvc.md.
+#define SATURACION            190
 
 // ---------------------------------------------------------------------------
 // 6. CORTE FÍSICO DE ALIMENTACIÓN DE LA TIRA (opcional)

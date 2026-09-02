@@ -176,26 +176,18 @@ Secciones para tiradas de hasta 3 m:
 
 ---
 
-## 7. Montaje sobre la vidriera
+## 7. Montaje sobre la obra
 
-1. **Perfil de aluminio con difusor opal** por detrás de la vidriera. Cumple dos
-   funciones: disipa el calor de la tira (los WS2812B duran mucho más templados) y
-   difumina los puntos de luz, que si no se transparentan a través del vidrio.
-2. **Distancia al vidrio:** entre 3 y 6 cm. Más cerca se ven los puntos; más lejos se
-   pierde saturación de color.
-3. **No enrolles la tira sobrante** ni la dejes en su bobina: concentra el calor.
-   Corta por las marcas de corte y sobra lo que no uses.
-4. **Fija con el perfil, no solo con el adhesivo de la tira.** El adhesivo 3M cede con
-   el calor y el paso de los meses, sobre todo en vertical.
-   **Nada de silicona acética** (la que huele a vinagre) en contacto con la tira: al
-   curar libera ácido acético y corroe el marco plateado de los WS2812B. Silicona
-   neutra, o ninguna. Ver [05-vida-util-de-los-leds.md](05-vida-util-de-los-leds.md).
-5. **Humedad.** Si la obra está en un templo, un sótano o cerca de un muro exterior,
-   usa tira **IP65** y monta la caja de conexiones fuera de la zona de condensación.
-6. **Caja de conexiones ventilada.** Nunca hermética: la fuente necesita disipar sus
-   50 W nominales. Rejillas arriba y abajo, y accesible para mantenimiento.
+La obra está construida con **cartulina y PVC transparente de colores**, no con vidrio
+emplomado. El montaje mecánico y térmico está en
+[06-montaje-cartulina-pvc.md](06-montaje-cartulina-pvc.md); lo que no se negocia:
 
----
+1. **La fuente va fuera de la obra.** 50 W de fuente conmutada y 230 V no entran en una
+   estructura de cartulina. Caja aparte, ventilada y no combustible. A la pieza solo
+   llega el cable de 5 V.
+2. **La tira va sobre pletina o perfil de aluminio**, y el aluminio sobre la cartulina.
+   La cartulina no disipa y el PVC flexible se reblandece a partir de unos 60-70 °C.
+3. **Difusión obligatoria.** A través de PVC transparente los LED se ven como puntos.
 
 ## 8. Puesta en marcha (lista de comprobación)
 
