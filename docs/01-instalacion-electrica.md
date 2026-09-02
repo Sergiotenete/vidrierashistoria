@@ -37,7 +37,8 @@ temperatura.
 | 1 | Resistencia 330 Ω, 1/4 W | En serie con la línea de datos |
 | 1 | Condensador electrolítico 1000 µF / 16 V | En la entrada de la tira |
 | 1 | Condensador cerámico 100 nF | Junto a la alimentación del ESP32 |
-| 1 | Adaptador de nivel 74AHCT125 (o SN74HCT245) | Recomendado — ver §4 |
+| 1 | Adaptador de nivel 74AHCT125 (o SN74HCT245) | Recomendado — ver §4. Alimentado a 5 V |
+| 1 | Condensador cerámico 100 nF (C4) | Entre las patillas 14 y 7 de U1 |
 | 1 | Portafusibles + fusible 7,5 A | En el +5 V, antes de la tira |
 | — | Cable 1,5 mm² (16 AWG) rojo/negro | Alimentación e inyección |
 | — | Cable apantallado o par trenzado 0,25 mm² | Datos y conmutador |
@@ -45,6 +46,9 @@ temperatura.
 | 1 | Caja de conexiones ventilada | Aloja fuente, ESP32 y fusible |
 
 ---
+
+> Para el cableado físico —lista de cables uno a uno, patillaje del 74AHCT125 y orden de
+> montaje— ver [07-cableado-paso-a-paso.md](07-cableado-paso-a-paso.md).
 
 ## 3. Esquema de conexión
 

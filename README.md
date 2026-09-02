@@ -29,6 +29,7 @@ docs/
   04-reposo-y-consumo.md        standby del ESP32 (light/deep sleep) y consumo real
   05-vida-util-de-los-leds.md   qué envejece a los WS2812B y qué hacer al respecto
   06-montaje-cartulina-pvc.md   disipación, difusión y color a través de PVC
+  07-cableado-paso-a-paso.md    lista de cables, patillaje de U1 y orden de montaje
 ```
 
 ### Arranque rápido
