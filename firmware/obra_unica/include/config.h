@@ -34,9 +34,14 @@
 // 3. POTENCIA (fuente de 5 V / 10 A)
 // ---------------------------------------------------------------------------
 #define VOLTIOS               5
-// Techo de consumo que FastLED nunca sobrepasa. 6000 mA deja la fuente
-// trabajando al ~60 % de su capacidad: menos calor, mucha más vida útil.
-#define MAX_MILIAMPERIOS      6000
+// Techo de consumo que FastLED nunca sobrepasa.
+// 4000 mA con fuente de bloque sellado y conector de barril: ese conector
+// (5,5 x 2,1 mm) suele estar tarado en torno a 5 A, y es el eslabón más débil
+// de la instalación. El consumo real de la obra es ~1,8 A, así que el techo no
+// llega a actuar nunca; está para que ningún cambio futuro de brillo o de
+// efecto le pida al conector más de lo que aguanta.
+// Con fuente de caja metálica y regleta de tornillos puedes subirlo a 6000.
+#define MAX_MILIAMPERIOS      4000
 // Brillo máximo de la obra (0-255). Es el ajuste que más influye en la vida de
 // los LED: la temperatura de unión es lo que los envejece, y el brillo es lo que
 // la determina. De 180 a 150 la obra se ve un 11 % más tenue al ojo, pero

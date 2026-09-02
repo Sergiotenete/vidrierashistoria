@@ -7,9 +7,17 @@ manos, y en qué orden**.
 
 ## La idea que lo desbloquea todo
 
-Las dos líneas horizontales del esquema no son una abstracción: son **dos regletas de
-verdad** dentro de la caja de conexiones. Una lleva el +5 V ya protegido por el fusible;
-la otra, la masa.
+Las dos líneas horizontales del esquema no son una abstracción: son **dos puntos de
+reparto de verdad**. Uno lleva el +5 V; el otro, la masa.
+
+En este proyecto la fuente es un **bloque sellado con conector de barril**, así que esos
+dos puntos se materializan con un **adaptador de barril a tornillos** (5,5 × 2,1 mm) y
+**dos conectores rápidos de palanca** tipo WAGO: uno para todos los rojos y otro para
+todos los negros. El fusible de 5 A va a la salida del conector rojo.
+
+> **Lo primero de todo:** mide con el polímetro cuál de los dos tornillos del adaptador
+> es el positivo, con la fuente enchufada y nada más conectado. Confundirlos destruye el
+> ESP32 y la tira en el acto. Márcalo con rotulador.
 
 **Todo lo demás cuelga de esas dos regletas**: el ESP32, el adaptador de nivel, los
 condensadores, la tira. En cuanto las montas, el resto del cableado deja de tener

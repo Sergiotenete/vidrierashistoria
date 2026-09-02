@@ -12,7 +12,7 @@ Instalación de **una sola obra** iluminada con **100 LED WS2812B**, gobernada p
 | Consumo teórico máximo (100 LED en blanco pleno) | 100 × 60 mA | **6,0 A** |
 | Consumo real con arcoíris a brillo 150/255 | ~100 × 18 mA | **~1,8 A** |
 | ESP32 (con radio apagada) | — | **~0,08 A** |
-| Techo impuesto por el firmware (`MAX_MILIAMPERIOS`) | — | **6,0 A** |
+| Techo impuesto por el firmware (`MAX_MILIAMPERIOS`) | — | **4,0 A** |
 | Fuente | 5 V × 10 A | **50 W** |
 
 La fuente queda trabajando en el peor caso al **60 %** de su capacidad, y en régimen
@@ -32,7 +32,9 @@ temperatura.
 |---|---|---|
 | 1 | ESP32 DevKit v1 (30 o 38 pines) | Cualquier placa con ESP32-WROOM sirve |
 | 1 | Tira WS2812B, 100 LED | 60 LED/m → 1,67 m; 30 LED/m → 3,33 m |
-| 1 | Fuente conmutada 5 V / 10 A | Con toma de tierra y bornes de tornillo |
+| 1 | Fuente 5 V / 10 A | **En este proyecto**: bloque sellado con enchufe montado y salida por conector de barril |
+| 1 | Adaptador de barril a tornillos | 5,5 × 2,1 mm, «hembra con bornes» |
+| 2 | Conector rápido de palanca (WAGO 221) | 3 o 5 huecos. Uno para los rojos, otro para los negros |
 | 1 | Conmutador basculante o de palanca, 1 circuito (SPST) | **De señal, no de red** — ver §5 |
 | 1 | Resistencia 330 Ω, 1/4 W | En serie con la línea de datos |
 | 1 | Condensador electrolítico 1000 µF / 16 V | En la entrada de la tira |
@@ -94,7 +96,7 @@ Reglas que no se negocian:
    ESP32 (o del adaptador de nivel). Amortigua reflexiones y protege el primer LED.
 3. **Condensador de 1000 µF entre +5 V y GND en la entrada de la tira**, respetando
    la polaridad. Absorbe el pico de corriente del arranque.
-4. **Fusible de 7,5 A** en el +5 V que va a la tira. La fuente da 10 A: sin fusible,
+4. **Fusible de 5 A** en el +5 V que va a la tira. La fuente da 10 A: sin fusible,
    un cortocircuito en la tira dispone de 10 A para hacer daño.
 5. **Nunca alimentes la tira desde el pin 5V del ESP32.** Esa pista no aguanta ni 1 A.
 
@@ -206,10 +208,11 @@ Antes de dar tensión, con la fuente desconectada de la red:
 
 Primer arranque:
 
-1. Ajusta la fuente a **5,00-5,05 V** con el potenciómetro y un multímetro. Compruébalo
-   luego **con la obra encendida**: muchas fuentes conmutadas dan de más en vacío. No
-   subas la tensión para compensar la caída de la tira; eso somete a los 100 LED a
-   sobretensión permanente. La caída se corrige con cobre (§6), no con voltios.
+1. **Comprueba la polaridad del adaptador de barril** con el polímetro, con la fuente
+   enchufada y nada más conectado: confundir el positivo con el negativo destruye el
+   ESP32 y la tira en el acto. La fuente sellada no lleva ajuste de tensión; comprueba
+   solo que da entre 4,9 y 5,2 V. Y no intentes compensar la caída de la tira subiendo
+   la tensión: se corrige con cobre (§6), no con voltios.
 2. Da tensión con el conmutador en **OFF**. La tira debe quedarse apagada.
 3. Pasa el conmutador a **ON**: 3 s de fundido de entrada y arcoíris en movimiento.
 4. Con la obra encendida, mide la tensión **al final de la tira**: si baja de 4,6 V,

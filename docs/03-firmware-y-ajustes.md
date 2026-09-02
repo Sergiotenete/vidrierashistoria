@@ -85,7 +85,7 @@ Todo lo que se toca en obra está en un único fichero.
 | `MODO_CONMUTADOR` | `0` | `0` interruptor enclavado · `1` pulsador momentáneo |
 | `CONMUTADOR_INVERTIDO` | `0` | Ponlo a `1` si la lógica queda al revés al montarlo |
 | `ANTIRREBOTE_MS` | `60` | Súbelo si el conmutador es viejo o el cable es largo |
-| `MAX_MILIAMPERIOS` | `6000` | Techo de consumo. No pasar de 8000 con la fuente de 10 A |
+| `MAX_MILIAMPERIOS` | `4000` | Techo de consumo, limitado por el conector de barril de la fuente (~5 A). Con fuente de regleta de tornillos puedes subirlo a 6000 |
 | `EXTENSION_ARCOIRIS` | `2` | `1` degradado muy suave · `3` un arcoíris completo en la obra |
 | `SATURACION` | `190` | Clave con PVC de color: un filtro resta, así que la luz muy saturada apaga paneles enteros (doc 06) |
 | `APLICAR_GAMMA_FADE` | `1` | Corrección perceptual del fundido. Déjalo a `1` |
