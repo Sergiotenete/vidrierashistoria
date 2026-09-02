@@ -22,12 +22,43 @@ es un **arranque en frío**, con su pico de corriente y su ciclo térmico. Una p
 encendida de forma continua y templada sufre menos que una que arranca en frío varias
 veces al día.
 
-Hay **un solo argumento real** a favor de cortar el raíl de la tira por salud de los
-LED, y es de segundo orden: el marco conductor de los WS2812B está plateado, y en
-ambiente húmedo la plata bajo tensión sufre **migración electroquímica** además de la
-corrosión normal. Una tira sin tensión no tiene ese mecanismo activo. Si la obra está en
-un templo, un sótano o un muro exterior, es una razón legítima para activar
-`USAR_CORTE_ALIMENTACION`. Pero el sellado y el ambiente pesan mucho más que eso.
+### ¿Y cortar la tira con un relé? Mecanismo por mecanismo
+
+Esta es la pregunta bien planteada: **de todo lo que envejece a un WS2812B, ¿qué sigue
+activo mientras la tira está alimentada pero en negro?**
+
+| Mecanismo | ¿Activo con la tira alimentada en negro? | ¿Lo detiene el corte? |
+|---|---|---|
+| Depreciación lumínica (fósforo, silicona, die) | **No.** El die está apagado, no hay corriente ni emisión | No aporta nada |
+| Autocalentamiento | Sí, pero son 5 mW por LED: 1-2 °C sobre ambiente | Irrelevante |
+| Deslustre de la plata por azufre | Sí, pero es un proceso **químico**: no necesita tensión | **No.** Ocurre igual sin alimentar |
+| **Migración electroquímica** (dendritas de plata, pistas de la tira) | **Sí.** Necesita tensión + humedad + contaminación iónica | **Sí. Este es el único** |
+| Desgaste del controlador interno | Despreciable a 5 V y temperatura ambiente | Sin efecto práctico |
+| Exposición a transitorios de la fuente | Sí | Sí, pero es un seguro, no desgaste |
+
+O sea: **el reloj principal, que es la depreciación lumínica, ya está parado con solo
+mostrar negro.** El corte no lo para «más».
+
+Lo que sí detiene es la **migración electroquímica**: la plata es especialmente propensa
+a formar dendritas cuando hay tensión aplicada, humedad y restos iónicos (fundente mal
+limpiado, típico en tira barata). Sin tensión, ese mecanismo se para en seco. Es real,
+pero es de segundo orden y **solo pesa en ambiente húmedo**: un templo, un sótano, un
+muro exterior con condensación. En un interior seco y con tira IP65, es casi teórico.
+
+Ojo con el matiz del azufre: el deslustre de la plata **no lo evita el corte**, porque es
+una reacción química que no necesita tensión. Contra eso solo valen el sellado y el
+ambiente.
+
+**Y el corte tiene un coste:** un componente más, es decir un punto de fallo más. Si lo
+haces, usa un **MOSFET de canal P de lado alto con arranque suave**, no un relé
+mecánico: no tiene contactos que picarse al cerrar sobre el condensador de 1000 µF, no
+se puede quedar pegado y no hace clic. Juega a favor que el firmware nunca conmuta a
+plena carga — da tensión con la tira aún en negro y corta cuando el fundido ya ha
+terminado, así que el dispositivo nunca ve los 6 A.
+
+**Resumen: si la vidriera está en un sitio húmedo, sí, ponlo, y ponlo con MOSFET. Si está
+en un interior seco, el beneficio para los LED es prácticamente nulo** y estás añadiendo
+un componente que puede fallar a cambio de poco.
 
 ---
 
@@ -164,7 +195,7 @@ Merece la pena señalarlo, porque no es casual:
 | 5 | Ambiente: IP65, silicona neutra, sin azufre | **Alto** en templos y sitios húmedos |
 | 6 | Inyección por los dos extremos | Medio — tensión uniforme, sin extremos forzados |
 | 7 | Fundidos de entrada y salida (hecho) | Medio — sin choques térmicos |
-| 8 | `USAR_CORTE_ALIMENTACION 1` | **Bajo** — solo por migración electroquímica en ambiente húmedo |
+| 8 | `USAR_CORTE_ALIMENTACION 1`, con MOSFET de lado alto | **Medio en ambiente húmedo** (detiene la migración electroquímica), **nulo en interior seco** |
 | 9 | `MODO_REPOSO` (dormir el ESP32) | **Ninguno** para los LED. Para la placa, ligeramente negativo |
 
 ---

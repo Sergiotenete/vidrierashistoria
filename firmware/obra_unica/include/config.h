@@ -74,7 +74,10 @@
 #define USAR_CORTE_ALIMENTACION 0
 #define PIN_ALIM_LEDS         26
 #define ALIM_ACTIVA_EN        HIGH     // nivel del GPIO que ACTIVA el relé/MOSFET
-#define RETARDO_ALIM_MS       40       // espera tras dar tensión antes del primer dato
+// Espera tras dar tensión a la tira antes de enviarle el primer dato. Con un
+// MOSFET de arranque suave, súbelo a ~100 para que el raíl esté del todo
+// establecido antes de que empiece el fundido de entrada.
+#define RETARDO_ALIM_MS       40
 
 // ---------------------------------------------------------------------------
 // 7. FUNCIONAMIENTO 24/7
