@@ -9,11 +9,12 @@ iluminada por detrás con una tira de 100 LED WS2812B gobernada por un ESP32. Un
 entrada y fundido de salida**, mostrando un **arcoíris en movimiento continuo** mientras
 está encendida.
 
-- Fuente: **5 V / 10 A**, trabajando por debajo del 60 % de su capacidad.
+- Alimentación: fuente **5 V / 5 A USB-C** y latiguillo hembra de 3 A, que es el techo
+  real. Consumo de la obra: **~1,7 A**, un 57 % de carga.
 - El ESP32 permanece **encendido de forma permanente**; el conmutador es una señal, no
   un corte de corriente — por eso el fundido de salida puede completarse.
-- Consumo en reposo con la obra apagada: **~0,9 W**, reducible a ~0,1 W con el
-  reposo del ESP32 y el corte del raíl de la tira ([doc 04](docs/04-reposo-y-consumo.md)).
+- Brillo al **50 %** de la escala, por vida útil de los LED ([doc 05](docs/05-vida-util-de-los-leds.md)).
+- Consumo en reposo con la obra apagada: **~0,9 W** ([doc 04](docs/04-reposo-y-consumo.md)).
 
 ### Estructura
 

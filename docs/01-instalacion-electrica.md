@@ -27,6 +27,46 @@ temperatura.
 
 ---
 
+## 1 bis. La alimentación elegida
+
+Tras descartar varias opciones, la instalación se alimenta así:
+
+```
+  Fuente GeeekPi 5 V / 5 A USB-C  (tipo Raspberry Pi 5, 25 W, cable fijo)
+            │
+            ▼
+  Latiguillo hembra USB-C de 2 hilos   ← máximo 3 A: este es el techo real
+            │  rojo (+5 V) · negro (GND)
+            ▼
+  Dos conectores rápidos de palanca (WAGO), uno para rojos y otro para negros
+            │
+            ├──► ESP32           (pin 5V / GND)
+            ├──► tira, principio (+5 V / GND)
+            ├──► tira, final     (inyección)
+            └──► conmutador      (retorno a negro)
+```
+
+**El techo no lo pone la fuente, lo pone el latiguillo: 3 A.** Los 5 A del enchufe no
+llegan a verse, porque un latiguillo pasivo negocia como mucho la corriente por defecto
+de USB-C, y en cualquier caso el máximo estándar a 5 V son 3 A. Da igual: el consumo real
+son ~1,7 A, un 57 % de carga.
+
+Estas fuentes de Raspberry Pi entregan **5,1 V** en lugar de 5,0 para compensar la caída
+del cable. Está dentro del rango que aguanta el WS2812B y juega a favor.
+
+### Antes de montar nada: comprobar que el latiguillo despierta a la fuente
+
+Un cargador USB-C **no saca tensión a ciegas**. Solo enciende la salida cuando detecta dos
+resistencias de **5,1 kΩ** en los pines `CC` del aparato conectado. Muchos latiguillos las
+llevan y muchos no, y la descripción del producto casi nunca lo aclara.
+
+Enchufa la fuente, conecta solo el latiguillo y mide entre el hilo rojo y el negro:
+
+| Medida | Qué significa |
+|---|---|
+| ~5,1 V | Lleva las resistencias. Adelante |
+| 0 V | No las lleva. Al ser un cable moldeado no se pueden añadir: usa una plaquita de circuito impreso, o un cargador **USB-A** con cable A→C, que no negocia nada |
+
 ## 2. Lista de materiales
 
 | Cant. | Componente | Notas |
