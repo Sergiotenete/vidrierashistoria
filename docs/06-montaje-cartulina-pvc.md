@@ -44,23 +44,25 @@ pocos centímetros y es justo el escenario que hay que evitar con cartulina alre
 
 ---
 
-## 3. Difusión: los puntos se ven
+## 3. Difusión: ya la tienes resuelta por construcción
 
-A través de un filtro transparente, cien LED se ven como **cien puntos**, no como luz —
-el filtro tiñe el color pero no difumina nada. Con un plástico opaco te lo perdonaría;
-con el tuyo, no. Se arregla con dos medidas combinadas:
+La tira va **perimetral** y los LED **no se ven en ningún momento** de forma directa.
+Eso, que parece un detalle de montaje, resuelve de un plumazo el error más común de estas
+piezas: **no hay puntos que difuminar**, porque nadie ve los LED. La luz sale, rebota en
+la cartulina blanca y llega al filtro ya repartida. La cartulina es el difusor.
 
-- **Distancia:** entre **4 y 8 cm** entre la tira y el panel de PVC. Más cerca se ven los
-  puntos; más lejos se pierde intensidad y definición.
-- **Una hoja difusora** entre la tira y el PVC de color: papel vegetal, PVC opal o
-  acetato satinado. Es lo que convierte los puntos en superficie.
+No hace falta hoja difusora. Lo que sí conviene cuidar:
 
-**Tu cartulina blanca ya trabaja a favor**: rebota la luz y ayuda a homogeneizar, además
-de mezclar los colores (§4). Cuanto más la aproveches —fondo blanco, laterales blancos—,
-menos se notarán los puntos y menos brillo necesitarás. Una cartulina negra por dentro se
-comería la luz.
-
----
+- **Todo el interior en blanco**: fondo y también los laterales. Cada superficie blanca
+  es un rebote más, y cada rebote reparte mejor la luz. Una cara negra por dentro es luz
+  tirada a la basura.
+- **Profundidad de la caja.** Con la tira en el borde, la luz tiene que cruzar el hueco
+  hasta el centro. Si la caja es muy plana, se nota el borde más brillante que el centro.
+  Como regla práctica, deja una **profundidad de al menos 1/6 del lado corto** del panel.
+- **Paneles no demasiado grandes.** Un panel muy ancho iluminado solo por su perímetro
+  se apaga por el centro. Si te pasa, es cuestión de profundidad o de subdividir.
+- **Apunta la tira hacia dentro o hacia el fondo**, nunca hacia el espectador aunque esté
+  oculta: cuanto más rebote antes de salir, más pareja sale la luz.
 
 ## 4. El color: un filtro resta, pero la cartulina blanca mezcla
 
@@ -84,22 +86,40 @@ reflector difuso excelente** —devuelve en torno al 80 % de la luz que recibe, 
 en todas direcciones—, así que la luz de LED vecinos con tonos distintos rebota y **se
 mezcla antes de llegar al filtro**.
 
-Cuanta más mezcla haya, más se parece la luz que llega a cada panel a una luz blanca, y
-más saturación aguanta la obra sin que ningún panel se quede negro.
+Y con la tira **perimetral**, esa mezcla es muy fuerte: cada punto del panel recibe luz
+de tramos de tira lejanos entre sí, con tonos muy distintos. Prácticamente tienes una
+**caja mezcladora**.
+
+Eso es bueno —ningún panel se va a quedar negro— pero tiene su propio riesgo, que es el
+contrario: **que se mezcle tanto que salga casi blanca** y el color del arcoíris apenas se
+aprecie.
 
 ### Entonces, ¿qué valor pongo?
 
-**No se decide sobre el papel: se decide con la obra montada**, porque depende de la
-geometría. Si cada panel tiene sus LED justo detrás y separados por tabiques, hay poca
-mezcla. Si todos comparten una caja blanca, hay mucha.
+Son **dos mandos sobre el mismo compromiso**, y en tu caso los dos apuntan en la misma
+dirección:
 
-`SATURACION` está en **190**, un punto intermedio. Enciéndela y mira:
+| Ajuste | Qué controla |
+|---|---|
+| `SATURACION` | Cuánto blanco lleva de origen cada LED |
+| `EXTENSION_ARCOIRIS` | Cuántos tonos distintos hay a la vez en la tira, que es cuánto se mezclan al rebotar |
+
+Con tira perimetral la caja ya mezcla mucho por su cuenta, así que **la luz tiene que
+salir saturada para sobrevivir al rebote**. Por eso `SATURACION` está en **220**, no en un
+valor intermedio.
+
+Enciéndela y mira:
 
 | Lo que ves | Qué hacer |
 |---|---|
-| Los paneles se encienden y se apagan por turnos | **Baja** hacia 160 |
-| Se ve lavado, casi blanco, el color no se aprecia | **Sube** hacia 230 |
+| Se ve lavado, casi blanco, el color no se aprecia | **Sube** `SATURACION` hacia 240 |
+| Sigue lavado con la saturación a tope | **Baja** `EXTENSION_ARCOIRIS` a 1, o a 0 |
+| Los paneles se encienden y se apagan por turnos | **Baja** `SATURACION` hacia 180 |
 | Todos los paneles vivos, con el color viajando por encima | Déjalo |
+
+Con `EXTENSION_ARCOIRIS` a **0** toda la obra está del mismo color a la vez y va virando
+despacio por el círculo cromático. Con una caja mezcladora es probablemente el ajuste que
+mejor se vea: el color llega limpio al filtro en lugar de promediarse a blanco.
 
 Es un cambio de una línea en `config.h` y treinta segundos de regrabar. No le des más
 vueltas antes de verlo.
@@ -112,9 +132,11 @@ claros bastante más que los azules y rojos profundos. Contando además el rebot
 cartulina, digamos que la obra se verá **en torno a la mitad de brillante** que la tira
 desnuda.
 
-Con `BRILLO_MAXIMO` en 128 eso debería bastar de sobra para una pieza vista de cerca en
-interior. Si aun así se te queda corta, súbelo — pero antes prueba a **acercar la
-cartulina blanca** o a mejorar la difusión, que es luz gratis y no cuesta vida útil.
+Con la tira perimetral pierdes algo más, porque la luz hace uno o dos rebotes antes de
+salir y la cartulina devuelve el 80 % en cada uno. Aun así, con `BRILLO_MAXIMO` en 128
+debería bastar de sobra para una pieza vista de cerca en interior. Si se te queda corta,
+antes de subir el brillo prueba a **blanquear más el interior** o a **reducir la
+profundidad muerta**: es luz gratis y no cuesta vida útil.
 
 ## 5. Ventilación
 
@@ -130,7 +152,8 @@ caliente sale por arriba sin necesidad de ventilador.
 - [ ] A la pieza solo entran 5 V y el cable del conmutador.
 - [ ] Tira sobre aluminio; aluminio sobre la cartulina. Nada de tira pegada al cartón.
 - [ ] Tira sobrante cortada por las marcas, no enrollada.
-- [ ] 4-8 cm entre la tira y el PVC, con hoja difusora en medio.
+- [ ] Interior todo blanco, incluidos los laterales.
+- [ ] Profundidad suficiente para que el centro del panel no se vea más apagado que el borde.
 - [ ] Aberturas de ventilación arriba y abajo.
 - [ ] Tras 2 h encendida: aluminio, PVC y placa **tibios**, nunca calientes.
 - [ ] `SATURACION` ajustado con la obra montada, no antes.

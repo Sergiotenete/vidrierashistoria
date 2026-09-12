@@ -39,14 +39,15 @@
 // conector por el que entra la corriente. Elige según cómo alimentes la obra:
 //
 //   Fuente de caja metálica con regleta de tornillos ....... 6000
-//   Bloque sellado con conector de barril 5,5 x 2,1 mm ..... 4000   <- actual
-//   Conector USB-C (el máximo estándar a 5 V son 3 A) ...... 2200
+//   Bloque sellado con conector de barril 5,5 x 2,1 mm ..... 4000
+//   Conector USB-C (el máximo estándar a 5 V son 3 A) ...... 2200   <- actual
 //   Cargador USB de 2 A, solo para pruebas de banco ........ 1200
 //
-// El consumo real de la obra con los ajustes de abajo es ~1,9 A, así que el
-// techo no llega a actuar: está para que ningún cambio futuro de brillo o de
-// efecto le pida al conector más de lo que aguanta.
-#define MAX_MILIAMPERIOS      4000
+// Está en 2200 porque es el valor seguro con CUALQUIERA de las dos opciones que
+// estás barajando, USB-C o barril: protege el conector más débil y no recorta
+// nada con el brillo actual. El consumo real de la obra es ~1,7 A. Si acabas
+// con el barril y quieres subir el brillo, súbelo a 4000.
+#define MAX_MILIAMPERIOS      2200
 // Brillo máximo de la obra, al 50 % de la escala 0-255. Es el ajuste que más
 // influye en la vida de los LED: la temperatura de unión es lo que los envejece
 // y el brillo es lo que la determina. Frente a un 180, este 128 disipa un 29 %
@@ -72,15 +73,21 @@
 #define VELOCIDAD_ARCOIRIS    40
 // Salto de tono entre LED contiguos. Con 100 LED: 1 = degradado muy suave,
 // 3 = un arcoíris completo repartido a lo largo de la obra.
+// Es la otra mitad del mismo compromiso que SATURACION: cuantos más tonos haya
+// a la vez en la tira, más se mezclan al rebotar y más blanca sale la luz.
+// Con tira perimetral, si aun subiendo la saturación se ve lavado, baja esto a
+// 1 o a 0 (toda la obra del mismo color a la vez, cambiando poco a poco).
 #define EXTENSION_ARCOIRIS    2
 // Saturación de la luz. Con filtros de color por delante hay que ajustarla con
 // la obra montada, porque depende de cuánto se mezcle la luz antes de llegar al
 // filtro: la cartulina blanca rebota y mezcla los tonos de LED vecinos, y cuanta
 // más mezcla haya, más saturación aguanta sin que ningún panel se apague.
 //   - Si los paneles se encienden y apagan por turnos: BAJA hacia 160.
-//   - Si se ve lavado, casi blanco: SUBE hacia 230.
+//   - Si se ve lavado, casi blanco: SUBE hacia 240.
+// Con tira perimetral y cartulina blanca hay MUCHA mezcla, así que 220 es el
+// punto de partida: la luz tiene que salir saturada para sobrevivir al rebote.
 // Ver docs/06-montaje-cartulina-pvc.md.
-#define SATURACION            190
+#define SATURACION            220
 
 // ---------------------------------------------------------------------------
 // 6. CORTE FÍSICO DE ALIMENTACIÓN DE LA TIRA (opcional)

@@ -85,9 +85,9 @@ Todo lo que se toca en obra está en un único fichero.
 | `MODO_CONMUTADOR` | `0` | `0` interruptor enclavado · `1` pulsador momentáneo |
 | `CONMUTADOR_INVERTIDO` | `0` | Ponlo a `1` si la lógica queda al revés al montarlo |
 | `ANTIRREBOTE_MS` | `60` | Súbelo si el conmutador es viejo o el cable es largo |
-| `MAX_MILIAMPERIOS` | `4000` | Techo de consumo, limitado por el conector de barril de la fuente (~5 A). Con fuente de regleta de tornillos puedes subirlo a 6000 |
+| `MAX_MILIAMPERIOS` | `2200` | Techo de consumo, limitado por el conector. Tabla por tipo de conector en `config.h` |
 | `EXTENSION_ARCOIRIS` | `2` | `1` degradado muy suave · `3` un arcoíris completo en la obra |
-| `SATURACION` | `190` | Se ajusta con la obra montada: depende de cuánta luz se mezcle antes del filtro (doc 06) |
+| `SATURACION` | `220` | Se ajusta con la obra montada: depende de cuánta luz se mezcle antes del filtro (doc 06) |
 | `APLICAR_GAMMA_FADE` | `1` | Corrección perceptual del fundido. Déjalo a `1` |
 | `USAR_CORTE_ALIMENTACION` | `0` | Relé/MOSFET de lado alto sobre el +5 V de la tira (ver doc 02, opción C) |
 | `MODO_REPOSO` | `0` | `0` sin reposo · `1` light sleep · `2` deep sleep (ver doc 04) |
