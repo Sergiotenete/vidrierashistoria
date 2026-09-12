@@ -206,7 +206,7 @@ Para el ESP32 el orden es distinto, y también es corto:
 
 | Medida | Por qué |
 |---|---|
-| Alimentar por el pin `5V`, nunca por el micro-USB permanente | El USB es un conector de datos: se afloja y da microcortes |
+| Alimentar por **USB-C con latiguillo dedicado**, no por micro-USB ni por el cable de un cargador | El micro-USB se afloja y da microcortes; el USB-C aguanta ~10.000 ciclos y sujeta bien |
 | Desacoplo (100 nF + 220-470 µF) junto a la placa | Evita que los picos de la tira disparen el *brownout* |
 | WiFi y Bluetooth apagados (hecho) | Menos consumo y varios grados menos |
 | Caja ventilada | La fuente es lo que calienta, y calienta a todo lo que tiene al lado |

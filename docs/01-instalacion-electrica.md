@@ -54,6 +54,15 @@ son ~1,7 A, un 57 % de carga.
 Estas fuentes de Raspberry Pi entregan **5,1 V** en lugar de 5,0 para compensar la caída
 del cable. Está dentro del rango que aguanta el WS2812B y juega a favor.
 
+El **ESP32 se alimenta por su propio puerto USB-C**, no por los pines, mediante un
+segundo latiguillo —esta vez **macho**— que sale de los mismos conectores rápidos. Así no
+hace falta un segundo enchufe y, sobre todo, **la masa queda compartida con la tira
+automáticamente**, que es la condición para que la línea de datos funcione.
+
+> Al programar desde el ordenador, **desenchufa ese latiguillo** del ESP32: no conviene
+> tener dos fuentes conectadas a la vez. Como ocupa el único puerto USB, el propio montaje
+> te obliga a hacerlo bien.
+
 ### Antes de montar nada: comprobar que el latiguillo despierta a la fuente
 
 Un cargador USB-C **no saca tensión a ciegas**. Solo enciende la salida cuando detecta dos
@@ -74,7 +83,8 @@ Enchufa la fuente, conecta solo el latiguillo y mide entre el hilo rojo y el neg
 | 1 | ESP32 DevKit v1 (30 o 38 pines) | Cualquier placa con ESP32-WROOM sirve |
 | 1 | Tira WS2812B, 100 LED | 60 LED/m → 1,67 m; 30 LED/m → 3,33 m |
 | 1 | Fuente GeeekPi 5 V / 5 A USB-C | Enchufe y cable ya montados. Entrega 5,1 V |
-| 1 | Latiguillo hembra USB-C, 2 hilos | Máx. 3 A. **Comprobar que lleva las resistencias CC** |
+| 1 | Latiguillo **hembra** USB-C, 2 hilos | Máx. 3 A. **Comprobar que lleva las resistencias CC** |
+| 1 | Latiguillo **macho** USB-C, 2 hilos | Alimenta el ESP32 por su propio puerto USB-C |
 | 2 | Conector rápido de palanca (WAGO 221) | 3 o 5 huecos. Uno para los rojos, otro para los negros |
 | 1 | Conmutador basculante o de palanca, 1 circuito (SPST) | **De señal, no de red** — ver §5 |
 | 1 | Resistencia 330 Ω, 1/4 W | En serie con la línea de datos |
@@ -101,12 +111,12 @@ Enchufa la fuente, conecta solo el latiguillo y mide entre el hilo rojo y el neg
   LATIGUILLO HEMBRA USB-C                    máximo 3 A  ←  el techo real
     │
     ├── hilo rojo  ──►  CONECTOR RÁPIDO ROJO
-    │                     ├──►  ESP32, pin 5V
+    │                     ├──►  latiguillo USB-C MACHO ──► puerto USB-C del ESP32
     │                     ├──►  tira, principio   (+5 V)
     │                     └──►  tira, final       (+5 V, inyección)
     │
     └── hilo negro ──►  CONECTOR RÁPIDO NEGRO
-                          ├──►  ESP32, pin GND
+                          ├──►  el mismo latiguillo macho (hilo negro)
                           ├──►  tira, principio   (GND)
                           ├──►  tira, final       (GND, inyección)
                           └──►  conmutador, un polo
@@ -137,7 +147,7 @@ Reglas que no se negocian:
 4. **Todo sale de los dos conectores rápidos**, nunca encadenado de un punto al
    siguiente. Si la inyección del final la llevas desde el principio de la tira, no
    estás inyectando nada.
-5. **Nunca alimentes la tira desde el pin 5V del ESP32.** Esa pista no aguanta ni 1 A.
+5. **Nunca alimentes la tira desde el ESP32.** El ESP32 se alimenta por su USB-C y no reparte corriente a nadie: la tira cuelga directamente de los conectores rápidos.
 6. **Sin fusible.** Con la fuente de 10 A habría sido obligatorio; el latiguillo USB-C ya
    limita a 3 A y la fuente lleva protección propia.
 

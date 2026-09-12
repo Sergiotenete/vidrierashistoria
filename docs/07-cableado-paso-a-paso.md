@@ -38,7 +38,9 @@ Cuatro cosas, y ninguna toca a las demás salvo por las regletas:
    limita a 3 A y la fuente lleva su propia protección.
 3. **Una placa auxiliar** de perfboard con **U1**, **R1** y los condensadores **C2**,
    **C3** y **C4**. Una plaquita de 5 × 5 cm sobra.
-4. **El ESP32**, sobre zócalos de tira para poder sacarlo sin desoldar nada.
+4. **El ESP32**, sobre zócalos de tira para poder sacarlo sin desoldar nada. Se alimenta
+   por su **puerto USB-C**, con un latiguillo macho que sale de los conectores rápidos;
+   de sus pines solo salen dos cables de señal, `GPIO 13` y `GPIO 27`.
 
 **C1** (1000 µF) es la excepción: va en el otro extremo, junto a la regleta de salida
 **J1**, lo más cerca posible de donde arranca la tira.
@@ -88,8 +90,9 @@ Cada fila es un cable físico.
 | 1-3 | — | — | *No hay cableado de red: la fuente trae enchufe y cable de fábrica* |
 | 4 | Latiguillo, hilo **rojo** | Conector rápido **rojo** | ya viene en el latiguillo |
 | 5 | Latiguillo, hilo **negro** | Conector rápido **negro** | ya viene en el latiguillo |
-| 6 | Conector rojo | ESP32 pin `5V` (o `VIN`) | 0,5 mm² rojo |
-| 7 | Conector negro | ESP32 pin `GND` | 0,5 mm² negro |
+| 6 | Conector rojo | Latiguillo USB-C **macho**, hilo rojo | ya viene en el latiguillo |
+| 7 | Conector negro | El mismo latiguillo, hilo negro | ya viene en el latiguillo |
+| 7 bis | Ese latiguillo | Puerto **USB-C del ESP32** | enchufado, no soldado |
 | 8 | Conector rojo | Placa aux. — U1 pat. 14, C2, C3 | 0,5 mm² rojo |
 | 9 | Conector negro | Placa aux. — U1 pat. 7, C2, C3 | 0,5 mm² negro |
 | 10 | ESP32 `GPIO 13` | U1 patilla 2 | 0,25 mm², lo más corto posible |
@@ -118,8 +121,9 @@ solo has puesto el mismo cable dos veces.
    **~5,1 V** o no sigas.
 3. **Desenchufa.** Monta los dos conectores rápidos (cables 4–5). Comprueba que entre uno
    y otro **no hay continuidad**.
-4. Cuelga el **ESP32** y la **placa auxiliar** de los conectores (6–9). Enchufa: el ESP32
-   debe arrancar. Mide **5 V entre las patillas 14 y 7 de U1**.
+4. Cuelga la **placa auxiliar** de los conectores (8–9) y monta el latiguillo macho
+   (6–7). Enchufa ese latiguillo al **puerto USB-C del ESP32**: la placa debe arrancar.
+   Mide **5 V entre las patillas 14 y 7 de U1**.
 5. Desenchufa. Cablea las **señales** (10–13) y el conmutador. Con el firmware grabado, la
    consola serie debe reaccionar al accionar S1 aunque no haya tira conectada.
 6. Desenchufa. Monta **C1**, la regleta **J1** y la **tira** (14–16), respetando el

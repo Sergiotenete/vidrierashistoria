@@ -57,8 +57,9 @@ La consola informa de cada transición:
    - `include/config.h` como **`config.h`**
 4. Placa: *ESP32 Dev Module*. Velocidad de subida: 921600.
 
-> Durante la grabación, desconecta el +5 V de la fuente del pin `5V` de la placa y
-> alimenta solo por USB. No conviene tener las dos fuentes en paralelo.
+> Durante la grabación, **desenchufa el latiguillo USB-C** del ESP32 y conecta el cable
+> del ordenador en su lugar. Como ambos van al mismo puerto, no puedes equivocarte: nunca
+> tendrás las dos fuentes a la vez.
 
 ---
 
