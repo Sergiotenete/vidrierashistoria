@@ -10,9 +10,10 @@ Instalación de **una sola obra** iluminada con **100 LED WS2812B**, gobernada p
 | Concepto | Cálculo | Resultado |
 |---|---|---|
 | Consumo teórico máximo (100 LED en blanco pleno) | 100 × 60 mA | **6,0 A** |
-| Consumo real con arcoíris a brillo 150/255 | ~100 × 18 mA | **~1,8 A** |
+| Consumo real con arcoíris a brillo 128/255 | ~100 × 19 mA | **~1,9 A** |
 | ESP32 (con radio apagada) | — | **~0,08 A** |
 | Techo impuesto por el firmware (`MAX_MILIAMPERIOS`) | — | **4,0 A** |
+| Carga sobre la fuente en uso normal | 2,0 A / 10 A | **20 %** |
 | Fuente | 5 V × 10 A | **50 W** |
 
 La fuente queda trabajando en el peor caso al **60 %** de su capacidad, y en régimen

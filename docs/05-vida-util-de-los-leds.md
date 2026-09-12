@@ -79,17 +79,17 @@ Lo que la determina:
   Es la mejora más grande que puedes hacer con un componente pasivo.
 - **La ventilación.** Una caja cerrada anula el aluminio.
 
-**He bajado `BRILLO_MAXIMO` de 180 a 150.** La cuenta:
+**`BRILLO_MAXIMO` está en 128, la mitad de la escala.** La cuenta, frente a un 180:
 
-| | 180 | 150 |
+| | 180 | 128 |
 |---|---|---|
-| Potencia disipada | 100 % | **83 %** |
-| Brillo percibido por el ojo | 100 % | **89 %** |
+| Potencia disipada | 100 % | **71 %** |
+| Brillo percibido por el ojo | 100 % | **86 %** |
 
-Un 11 % más tenue a cambio de un 17 % menos de calor. En una vidriera retroiluminada, la
-diferencia visual es difícil de apreciar sin comparar las dos lado a lado; la diferencia
-en temperatura de unión sí se nota en años de servicio. Si el espacio está muy iluminado
-y necesitas más, sube a 180 sabiendo lo que cuesta.
+Un 14 % más tenue a cambio de un **29 % menos de calor**. Esa asimetría es la que hay que
+explotar: la potencia crece casi lineal con el ajuste, pero el ojo responde a la raíz. En
+una obra retroiluminada la diferencia visual cuesta apreciarla sin comparar las dos lado
+a lado; la de temperatura de unión se nota en años de servicio.
 
 ### 2. Horas encendido acumuladas — la segunda palanca, y es enorme
 
@@ -190,7 +190,7 @@ Merece la pena señalarlo, porque no es casual:
 |---|---|---|
 | 1 | Perfil de aluminio + caja ventilada | **Muy alto** — decide la temperatura de unión |
 | 2 | `APAGADO_AUTOMATICO_H 8` | **Muy alto** — recorta horas acumuladas |
-| 3 | `BRILLO_MAXIMO 150` (hecho) | **Alto** — 17 % menos de calor |
+| 3 | `BRILLO_MAXIMO 128` (hecho) | **Alto** — 29 % menos de calor |
 | 4 | Fuente a 5,00 V exactos, medidos con carga | **Alto** — evita sobretensión permanente |
 | 5 | Ambiente: IP65, silicona neutra, sin azufre | **Alto** en templos y sitios húmedos |
 | 6 | Inyección por los dos extremos | Medio — tensión uniforme, sin extremos forzados |

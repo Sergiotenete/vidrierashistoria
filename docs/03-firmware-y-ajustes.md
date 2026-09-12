@@ -70,7 +70,7 @@ Todo lo que se toca en obra está en un único fichero.
 
 | Parámetro | Por defecto | Qué hace |
 |---|---|---|
-| `BRILLO_MAXIMO` | `150` | Brillo de la obra a plena luz (0-255). Ajuste estético principal y el que más influye en la vida de los LED (doc 05) |
+| `BRILLO_MAXIMO` | `128` | Brillo de la obra a plena luz (0-255). Ajuste estético principal y el que más influye en la vida de los LED (doc 05) |
 | `FADE_IN_MS` | `3000` | Duración del fundido de entrada, en milisegundos |
 | `FADE_OUT_MS` | `4000` | Duración del fundido de salida |
 | `VELOCIDAD_ARCOIRIS` | `40` | Velocidad del color. 40 → ciclo completo cada ~16 s. Bájalo a 15-20 para un ritmo más contemplativo |
@@ -87,7 +87,7 @@ Todo lo que se toca en obra está en un único fichero.
 | `ANTIRREBOTE_MS` | `60` | Súbelo si el conmutador es viejo o el cable es largo |
 | `MAX_MILIAMPERIOS` | `4000` | Techo de consumo, limitado por el conector de barril de la fuente (~5 A). Con fuente de regleta de tornillos puedes subirlo a 6000 |
 | `EXTENSION_ARCOIRIS` | `2` | `1` degradado muy suave · `3` un arcoíris completo en la obra |
-| `SATURACION` | `190` | Clave con PVC de color: un filtro resta, así que la luz muy saturada apaga paneles enteros (doc 06) |
+| `SATURACION` | `190` | Se ajusta con la obra montada: depende de cuánta luz se mezcle antes del filtro (doc 06) |
 | `APLICAR_GAMMA_FADE` | `1` | Corrección perceptual del fundido. Déjalo a `1` |
 | `USAR_CORTE_ALIMENTACION` | `0` | Relé/MOSFET de lado alto sobre el +5 V de la tira (ver doc 02, opción C) |
 | `MODO_REPOSO` | `0` | `0` sin reposo · `1` light sleep · `2` deep sleep (ver doc 04) |

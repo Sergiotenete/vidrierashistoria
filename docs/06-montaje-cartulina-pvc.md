@@ -1,9 +1,10 @@
 # 06 — Montaje sobre cartulina y PVC de colores
 
-La obra está construida con **cartulina y PVC transparente de colores**, no con vidrio
-emplomado. Eso cambia tres cosas respecto a una vidriera real: cómo se disipa el calor,
-dónde puede estar la fuente y —lo más importante para el resultado— **qué color acaba
-saliendo**.
+La obra está construida con **cartulina blanca y PVC transparente de colores**, no con
+vidrio emplomado: el PVC no es opaco, es un **filtro de color**, y la cartulina blanca
+hace de fondo. Eso cambia tres cosas respecto a una vidriera real: cómo se disipa el
+calor, dónde puede estar la fuente y —lo más importante para el resultado— **qué color
+acaba saliendo**.
 
 ---
 
@@ -45,64 +46,75 @@ pocos centímetros y es justo el escenario que hay que evitar con cartulina alre
 
 ## 3. Difusión: los puntos se ven
 
-A través de PVC transparente, cien LED se ven como **cien puntos**, no como luz. Es el
-error más común en este tipo de piezas y se arregla con dos medidas combinadas:
+A través de un filtro transparente, cien LED se ven como **cien puntos**, no como luz —
+el filtro tiñe el color pero no difumina nada. Con un plástico opaco te lo perdonaría;
+con el tuyo, no. Se arregla con dos medidas combinadas:
 
 - **Distancia:** entre **4 y 8 cm** entre la tira y el panel de PVC. Más cerca se ven los
   puntos; más lejos se pierde intensidad y definición.
 - **Una hoja difusora** entre la tira y el PVC de color: papel vegetal, PVC opal o
   acetato satinado. Es lo que convierte los puntos en superficie.
 
-Si el fondo interior de la caja es cartulina blanca, mejor: rebota la luz y ayuda a
-homogeneizar. Una cartulina negra por dentro se come la luz.
+**Tu cartulina blanca ya trabaja a favor**: rebota la luz y ayuda a homogeneizar, además
+de mezclar los colores (§4). Cuanto más la aproveches —fondo blanco, laterales blancos—,
+menos se notarán los puntos y menos brillo necesitarás. Una cartulina negra por dentro se
+comería la luz.
 
 ---
 
-## 4. El PVC de color resta, no suma
+## 4. El color: un filtro resta, pero la cartulina blanca mezcla
 
-Esta es la parte que más va a cambiar el aspecto de la obra, y conviene entenderla antes
-de montar nada.
+Aquí hay dos efectos que tiran en sentidos contrarios, y el resultado depende de cómo
+esté montada la obra.
+
+### El efecto que quita: el filtro resta
 
 **Un filtro de color no añade color: quita todo lo demás.** Un panel de PVC rojo solo
 deja pasar longitudes de onda largas. Cuando el arcoíris le manda verde, ese panel no se
-pone verde: **se apaga casi por completo**.
+pone verde: **se apaga**.
 
-Con luz muy saturada detrás de filtros de colores, el resultado es que los paneles se van
-encendiendo y apagando por turnos según por dónde pase el arcoíris. La obra **parpadea**
-en vez de fundirse, que es justo lo contrario de lo que buscan los fundidos suaves.
+Llevado al extremo, con luz muy saturada y cada panel iluminado por sus propios LED, los
+paneles se encienden y se apagan por turnos según por dónde pase el arcoíris. La obra
+**parpadea** en vez de fundirse, que es lo contrario de lo que buscan los fundidos.
 
-### La solución está en un parámetro
+### El efecto que salva: la cartulina blanca mezcla
 
-```c
-#define SATURACION  190   // en config.h
-```
+Aquí juega a tu favor cómo está construida la pieza. La **cartulina blanca es un
+reflector difuso excelente** —devuelve en torno al 80 % de la luz que recibe, repartida
+en todas direcciones—, así que la luz de LED vecinos con tonos distintos rebota y **se
+mezcla antes de llegar al filtro**.
 
-Una luz **menos saturada** lleva algo de todas las longitudes de onda. Así cada panel
-puede transmitir la suya, ninguno se queda negro, y el arcoíris pasa a **modular el
-conjunto** —desplazando el peso del color de unos paneles a otros— en vez de encender y
-apagar trozos.
+Cuanta más mezcla haya, más se parece la luz que llega a cada panel a una luz blanca, y
+más saturación aguanta la obra sin que ningún panel se quede negro.
 
-| `SATURACION` | Resultado con PVC de colores |
+### Entonces, ¿qué valor pongo?
+
+**No se decide sobre el papel: se decide con la obra montada**, porque depende de la
+geometría. Si cada panel tiene sus LED justo detrás y separados por tabiques, hay poca
+mezcla. Si todos comparten una caja blanca, hay mucha.
+
+`SATURACION` está en **190**, un punto intermedio. Enciéndela y mira:
+
+| Lo que ves | Qué hacer |
 |---|---|
-| 255 | Los paneles se encienden y apagan por turnos. Dramático, pero parpadea |
-| 190 *(por defecto)* | Todos los paneles vivos, con el color rotando por encima |
-| 150 | Brillo muy parejo, casi blanco cálido con un tinte que viaja |
+| Los paneles se encienden y se apagan por turnos | **Baja** hacia 160 |
+| Se ve lavado, casi blanco, el color no se aprecia | **Sube** hacia 230 |
+| Todos los paneles vivos, con el color viajando por encima | Déjalo |
 
-No hay un valor correcto: depende de lo saturado que sea tu PVC y del efecto que
-busques. **Pruébalo con la obra montada**, no antes: el mismo valor da resultados muy
-distintos según los colores que hayas elegido.
+Es un cambio de una línea en `config.h` y treinta segundos de regrabar. No le des más
+vueltas antes de verlo.
 
-### Y también se come la luz
+### Cuánta luz te come
 
-Un filtro de color saturado puede dejar pasar **solo un 20-30 %** de la luz que le llega.
-La obra se verá bastante más apagada que la tira desnuda, así que es probable que
-necesites subir `BRILLO_MAXIMO` por encima de 150.
+Un **filtro transparente** —el tuyo— es mucho más generoso que un plástico opaco de
+color: deja pasar aproximadamente entre un **30 y un 60 %** según el color, y los tonos
+claros bastante más que los azules y rojos profundos. Contando además el rebote en la
+cartulina, digamos que la obra se verá **en torno a la mitad de brillante** que la tira
+desnuda.
 
-Eso va en contra de la vida útil de los LED. Si acabas subiéndolo, **compénsalo activando
-`APAGADO_AUTOMATICO_H`**: recortar horas encendido es una palanca bastante más eficaz que
-recortar brillo, y no cuesta nada visualmente.
-
----
+Con `BRILLO_MAXIMO` en 128 eso debería bastar de sobra para una pieza vista de cerca en
+interior. Si aun así se te queda corta, súbelo — pero antes prueba a **acercar la
+cartulina blanca** o a mejorar la difusión, que es luz gratis y no cuesta vida útil.
 
 ## 5. Ventilación
 
@@ -122,3 +134,4 @@ caliente sale por arriba sin necesidad de ventilador.
 - [ ] Aberturas de ventilación arriba y abajo.
 - [ ] Tras 2 h encendida: aluminio, PVC y placa **tibios**, nunca calientes.
 - [ ] `SATURACION` ajustado con la obra montada, no antes.
+- [ ] Fondo interior de cartulina **blanca**, no negra: rebota y mezcla la luz.

@@ -35,19 +35,25 @@
 // ---------------------------------------------------------------------------
 #define VOLTIOS               5
 // Techo de consumo que FastLED nunca sobrepasa.
-// 4000 mA con fuente de bloque sellado y conector de barril: ese conector
-// (5,5 x 2,1 mm) suele estar tarado en torno a 5 A, y es el eslabón más débil
-// de la instalación. El consumo real de la obra es ~1,8 A, así que el techo no
-// llega a actuar nunca; está para que ningún cambio futuro de brillo o de
+// El techo lo pone el eslabón más débil, que casi nunca es la fuente sino el
+// conector por el que entra la corriente. Elige según cómo alimentes la obra:
+//
+//   Fuente de caja metálica con regleta de tornillos ....... 6000
+//   Bloque sellado con conector de barril 5,5 x 2,1 mm ..... 4000   <- actual
+//   Conector USB-C (el máximo estándar a 5 V son 3 A) ...... 2200
+//   Cargador USB de 2 A, solo para pruebas de banco ........ 1200
+//
+// El consumo real de la obra con los ajustes de abajo es ~1,9 A, así que el
+// techo no llega a actuar: está para que ningún cambio futuro de brillo o de
 // efecto le pida al conector más de lo que aguanta.
-// Con fuente de caja metálica y regleta de tornillos puedes subirlo a 6000.
 #define MAX_MILIAMPERIOS      4000
-// Brillo máximo de la obra (0-255). Es el ajuste que más influye en la vida de
-// los LED: la temperatura de unión es lo que los envejece, y el brillo es lo que
-// la determina. De 180 a 150 la obra se ve un 11 % más tenue al ojo, pero
-// disipa un 17 % menos de calor. Sube a 180-200 solo si el espacio está muy
-// iluminado y asume el coste en vida útil. Ver docs/05-vida-util-de-los-leds.md.
-#define BRILLO_MAXIMO         150
+// Brillo máximo de la obra, al 50 % de la escala 0-255. Es el ajuste que más
+// influye en la vida de los LED: la temperatura de unión es lo que los envejece
+// y el brillo es lo que la determina. Frente a un 180, este 128 disipa un 29 %
+// menos de calor y solo se ve un 14 % más tenue al ojo, porque la potencia crece
+// casi lineal con el ajuste y la vista responde a la raíz.
+// Ver docs/05-vida-util-de-los-leds.md.
+#define BRILLO_MAXIMO         128
 
 // ---------------------------------------------------------------------------
 // 4. FUNDIDOS
@@ -67,13 +73,13 @@
 // Salto de tono entre LED contiguos. Con 100 LED: 1 = degradado muy suave,
 // 3 = un arcoíris completo repartido a lo largo de la obra.
 #define EXTENSION_ARCOIRIS    2
-// Saturación de la luz. Con PVC o acetato de color por delante, un filtro RESTA:
-// un panel rojo no deja pasar el verde, así que con luz muy saturada los paneles
-// se apagan por turnos y la obra parpadea en vez de fundirse. Una luz menos
-// saturada lleva algo de todas las longitudes de onda y todos los paneles
-// transmiten la suya. 190 es un punto de partida para PVC de colores; sube hacia
-// 255 si quieres que se enciendan por turnos a propósito, baja hacia 150 para un
-// brillo parejo. Ver docs/06-montaje-cartulina-pvc.md.
+// Saturación de la luz. Con filtros de color por delante hay que ajustarla con
+// la obra montada, porque depende de cuánto se mezcle la luz antes de llegar al
+// filtro: la cartulina blanca rebota y mezcla los tonos de LED vecinos, y cuanta
+// más mezcla haya, más saturación aguanta sin que ningún panel se apague.
+//   - Si los paneles se encienden y apagan por turnos: BAJA hacia 160.
+//   - Si se ve lavado, casi blanco: SUBE hacia 230.
+// Ver docs/06-montaje-cartulina-pvc.md.
 #define SATURACION            190
 
 // ---------------------------------------------------------------------------
