@@ -41,5 +41,6 @@ pio run -t upload
 pio device monitor
 ```
 
+Guía de montaje paso a paso, con dibujos: ver el artefacto publicado desde esta rama.
 Antes de dar tensión por primera vez, sigue la lista de comprobación de
 [docs/01-instalacion-electrica.md](docs/01-instalacion-electrica.md#8-puesta-en-marcha-lista-de-comprobación).

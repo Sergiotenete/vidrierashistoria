@@ -73,8 +73,8 @@ Enchufa la fuente, conecta solo el latiguillo y mide entre el hilo rojo y el neg
 |---|---|---|
 | 1 | ESP32 DevKit v1 (30 o 38 pines) | Cualquier placa con ESP32-WROOM sirve |
 | 1 | Tira WS2812B, 100 LED | 60 LED/m → 1,67 m; 30 LED/m → 3,33 m |
-| 1 | Fuente 5 V / 10 A | **En este proyecto**: bloque sellado con enchufe montado y salida por conector de barril |
-| 1 | Adaptador de barril a tornillos | 5,5 × 2,1 mm, «hembra con bornes» |
+| 1 | Fuente GeeekPi 5 V / 5 A USB-C | Enchufe y cable ya montados. Entrega 5,1 V |
+| 1 | Latiguillo hembra USB-C, 2 hilos | Máx. 3 A. **Comprobar que lleva las resistencias CC** |
 | 2 | Conector rápido de palanca (WAGO 221) | 3 o 5 huecos. Uno para los rojos, otro para los negros |
 | 1 | Conmutador basculante o de palanca, 1 circuito (SPST) | **De señal, no de red** — ver §5 |
 | 1 | Resistencia 330 Ω, 1/4 W | En serie con la línea de datos |
@@ -82,11 +82,10 @@ Enchufa la fuente, conecta solo el latiguillo y mide entre el hilo rojo y el neg
 | 1 | Condensador cerámico 100 nF | Junto a la alimentación del ESP32 |
 | 1 | Adaptador de nivel 74AHCT125 (o SN74HCT245) | Recomendado — ver §4. Alimentado a 5 V |
 | 1 | Condensador cerámico 100 nF (C4) | Entre las patillas 14 y 7 de U1 |
-| 1 | Portafusibles + fusible 7,5 A | En el +5 V, antes de la tira |
-| — | Cable 1,5 mm² (16 AWG) rojo/negro | Alimentación e inyección |
+| — | Cable 0,75-1,0 mm² rojo/negro | Alimentación e inyección (basta: son 1,7 A) |
 | — | Cable apantallado o par trenzado 0,25 mm² | Datos y conmutador |
-| 1 | Perfil de aluminio con difusor opal | Disipa y homogeneiza la luz |
-| 1 | Caja de conexiones ventilada | Aloja fuente, ESP32 y fusible |
+| 1 | Perfil o pletina de aluminio | Disipa; la tira va perimetral sobre él |
+| 1 | Caja de conexiones ventilada | Aloja el ESP32 y los conectores rápidos |
 
 ---
 
@@ -96,37 +95,35 @@ Enchufa la fuente, conecta solo el latiguillo y mide entre el hilo rojo y el neg
 ## 3. Esquema de conexión
 
 ```
-    RED 230 V                 FUENTE 5 V / 10 A
-   L ───────────────────────► L
-   N ───────────────────────► N
-   PE ──────────────────────► ⏚  (tierra a la carcasa: obligatorio)
+  FUENTE GeeekPi 5 V / 5 A USB-C
+    │    enchufe y cable de fábrica: no hay nada de 230 V que cablear
+    ▼
+  LATIGUILLO HEMBRA USB-C                    máximo 3 A  ←  el techo real
+    │
+    ├── hilo rojo  ──►  CONECTOR RÁPIDO ROJO
+    │                     ├──►  ESP32, pin 5V
+    │                     ├──►  tira, principio   (+5 V)
+    │                     └──►  tira, final       (+5 V, inyección)
+    │
+    └── hilo negro ──►  CONECTOR RÁPIDO NEGRO
+                          ├──►  ESP32, pin GND
+                          ├──►  tira, principio   (GND)
+                          ├──►  tira, final       (GND, inyección)
+                          └──►  conmutador, un polo
 
-                        ┌── +5V ──┬──────────────┬───────────────┐
-                        │         │              │               │
-                        │      [FUSIBLE       [ESP32]         (inyección
-                        │       7,5 A]         pin 5V/VIN       al final
-                        │         │                             de la tira)
-                        │         │                                │
-                        │    ┌────┴───────────────┐                │
-                        │    │  + 1000 µF/16 V    │                │
-                        │    │  ──┬──             │                │
-                        │        GND              │                │
-                        │         │               │                │
-                        │    ╔════╧═══════════════╧════════════════╧═══╗
-                        │    ║        TIRA WS2812B — 100 LED           ║
-                        │    ║  +5V   GND   DIN                        ║
-                        │    ╚═══════════════╤═════════════════════════╝
-                        │                    │
-                        │            [74AHCT125]  3,3 V → 5 V
-                        │                    │
-                        │                 [330 Ω]
-                        │                    │
-                        └── GND ─────┬───────┴──── GPIO 13 (DATOS) ── ESP32
-                                     │
-                                     ├──────────── GND ───────────── ESP32
-                                     │
-                                     └──[ CONMUTADOR ]── GPIO 27 ─── ESP32
+
+  SEÑALES
+
+    ESP32  GPIO 13  ──►  [74AHCT125]  ──►  [330 Ω]  ──►  tira, DIN
+    ESP32  GPIO 27  ──►  [CONMUTADOR]  ──►  conector rápido negro
+
+
+  Y en la entrada de la tira, entre +5 V y GND:  condensador 1000 µF
+  (la banda impresa es el negativo)
 ```
+
+La tira es **perimetral**, así que su extremo final queda cerca del principio y el cable
+de inyección sale corto.
 
 Reglas que no se negocian:
 
@@ -137,9 +134,12 @@ Reglas que no se negocian:
    ESP32 (o del adaptador de nivel). Amortigua reflexiones y protege el primer LED.
 3. **Condensador de 1000 µF entre +5 V y GND en la entrada de la tira**, respetando
    la polaridad. Absorbe el pico de corriente del arranque.
-4. **Fusible de 5 A** en el +5 V que va a la tira. La fuente da 10 A: sin fusible,
-   un cortocircuito en la tira dispone de 10 A para hacer daño.
+4. **Todo sale de los dos conectores rápidos**, nunca encadenado de un punto al
+   siguiente. Si la inyección del final la llevas desde el principio de la tira, no
+   estás inyectando nada.
 5. **Nunca alimentes la tira desde el pin 5V del ESP32.** Esa pista no aguanta ni 1 A.
+6. **Sin fusible.** Con la fuente de 10 A habría sido obligatorio; el latiguillo USB-C ya
+   limita a 3 A y la fuente lleva protección propia.
 
 ---
 
@@ -243,17 +243,13 @@ Antes de dar tensión, con la fuente desconectada de la red:
 - [ ] Continuidad entre el GND de la fuente, el GND del ESP32 y el GND de la tira.
 - [ ] Sin continuidad entre +5 V y GND (comprobar cortocircuitos).
 - [ ] Polaridad del condensador de 1000 µF correcta (la banda es el negativo).
-- [ ] Fusible de 7,5 A montado en el +5 V.
-- [ ] Toma de tierra conectada a la carcasa de la fuente.
 - [ ] La tira entra por su extremo **DIN**, no por DO (mira las flechas impresas).
 
 Primer arranque:
 
-1. **Comprueba la polaridad del adaptador de barril** con el polímetro, con la fuente
-   enchufada y nada más conectado: confundir el positivo con el negativo destruye el
-   ESP32 y la tira en el acto. La fuente sellada no lleva ajuste de tensión; comprueba
-   solo que da entre 4,9 y 5,2 V. Y no intentes compensar la caída de la tira subiendo
-   la tensión: se corrige con cobre (§6), no con voltios.
+1. **Mide el latiguillo** con la fuente enchufada y nada más conectado, punta roja en el
+   hilo rojo: **~5,1 V** confirma a la vez que lleva las resistencias `CC` y que los
+   colores no están invertidos. Ver §1 bis. La fuente no lleva ajuste de tensión.
 2. Da tensión con el conmutador en **OFF**. La tira debe quedarse apagada.
 3. Pasa el conmutador a **ON**: 3 s de fundido de entrada y arcoíris en movimiento.
 4. Con la obra encendida, mide la tensión **al final de la tira**: si baja de 4,6 V,
