@@ -87,7 +87,7 @@ Enchufa la fuente, conecta solo el latiguillo y mide entre el hilo rojo y el neg
 | 1 | Latiguillo **macho** USB-C, 2 hilos | Alimenta el ESP32 por su propio puerto USB-C |
 | 2 | Conector rápido de palanca (WAGO 221) | 3 o 5 huecos. Uno para los rojos, otro para los negros |
 | 1 | Conmutador basculante o de palanca, 1 circuito (SPST) | **De señal, no de red** — ver §5 |
-| 1 | Resistencia 330 Ω, 1/4 W | En serie con la línea de datos |
+| 1 | Resistencia 220-470 Ω, 1/4 W | En serie con la línea de datos. 330 Ω es el valor típico, pero vale cualquiera del rango |
 | 1 | Condensador electrolítico 1000 µF / 16 V | En la entrada de la tira |
 | 1 | Condensador cerámico 100 nF | Junto a la alimentación del ESP32 |
 | 1 | Adaptador de nivel 74AHCT125 (o SN74HCT245) | Recomendado — ver §4. Alimentado a 5 V |
@@ -140,8 +140,17 @@ Reglas que no se negocian:
 1. **GND común.** El negativo de la fuente, el GND del ESP32 y el GND de la tira
    deben estar unidos. Sin masa común la línea de datos no tiene referencia y la
    tira parpadea en colores aleatorios.
-2. **Resistencia de 330 Ω en serie con DIN**, montada lo más cerca posible del
-   ESP32 (o del adaptador de nivel). Amortigua reflexiones y protege el primer LED.
+2. **Resistencia en serie con DIN**, montada lo más cerca posible del ESP32 (o del
+   adaptador de nivel). Amortigua reflexiones y, sobre todo, evita que entre corriente a
+   saco por los diodos de protección del primer LED si alguna vez hay datos con la tira
+   sin alimentar. Es el fallo que más primeros LED se ha llevado por delante.
+
+   **El valor no es crítico: sirve cualquiera entre 220 Ω y 470 Ω**, y en la práctica
+   funciona de 100 Ω a 1 kΩ. Por encima de 1 kΩ la constante RC con la capacidad del cable
+   empieza a redondear los flancos de una señal de 800 kHz y deja de ser fiable.
+   **Sin adaptador de nivel conviene quedarse en la parte baja del rango** (220 Ω antes
+   que 470 Ω): con 3,3 V el margen ya es justo y una resistencia grande redondea más los
+   flancos. La potencia es indiferente, por ahí pasan microamperios.
 3. **Condensador de 1000 µF entre +5 V y GND en la entrada de la tira**, respetando
    la polaridad. Absorbe el pico de corriente del arranque.
 
