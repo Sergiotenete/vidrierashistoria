@@ -129,7 +129,7 @@ Enchufa la fuente, conecta solo el latiguillo y mide entre el hilo rojo y el neg
 
 
   Y en la entrada de la tira, entre +5 V y GND:  condensador 1000 µF
-  (la banda impresa es el negativo)
+  (pata LARGA al rojo, pata CORTA al negro)
 ```
 
 La tira es **perimetral**, así que su extremo final queda cerca del principio y el cable
@@ -144,6 +144,21 @@ Reglas que no se negocian:
    ESP32 (o del adaptador de nivel). Amortigua reflexiones y protege el primer LED.
 3. **Condensador de 1000 µF entre +5 V y GND en la entrada de la tira**, respetando
    la polaridad. Absorbe el pico de corriente del arranque.
+
+   **Cómo saber cuál es cuál.** Hay dos indicaciones y conviene que coincidan:
+   - **La pata larga es el positivo** (va al rojo) y la corta el negativo. Misma
+     convención que en los LED.
+   - **La franja vertical impresa en el lateral marca el negativo**, normalmente con
+     símbolos `−` dentro. A veces queda girada hacia atrás o impresa en un color que se
+     confunde con el envoltorio: gíralo entero bajo luz buena antes de darla por
+     inexistente.
+
+   **Marca la pata larga antes de recortar las patas**: al cortarlas se pierde la única
+   pista que queda si el envoltorio no trae franja. Si no hay franja y las patas ya vienen
+   iguales, no lo adivines — cuesta céntimos, coge otro.
+
+   Al revés se calienta, se hincha y acaba reventando. A 5 V no es peligroso para ti,
+   pero el componente se pierde.
 4. **Todo sale de los dos conectores rápidos**, nunca encadenado de un punto al
    siguiente. Si la inyección del final la llevas desde el principio de la tira, no
    estás inyectando nada.
@@ -252,7 +267,7 @@ Antes de dar tensión, con la fuente desconectada de la red:
 
 - [ ] Continuidad entre el GND de la fuente, el GND del ESP32 y el GND de la tira.
 - [ ] Sin continuidad entre +5 V y GND (comprobar cortocircuitos).
-- [ ] Polaridad del condensador de 1000 µF correcta (la banda es el negativo).
+- [ ] Polaridad del condensador de 1000 µF correcta: **pata larga al rojo**.
 - [ ] La tira entra por su extremo **DIN**, no por DO (mira las flechas impresas).
 
 Primer arranque:
