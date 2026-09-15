@@ -58,7 +58,7 @@ static uint32_t tFrame  = 0;
 static bool     railVivo = true;
 static uint32_t tApagado = 0;   // instante en que la obra quedó apagada
 
-#if APAGADO_AUTOMATICO_H > 0
+#if APAGADO_AUTOMATICO_H > 0 && !MODO_PRUEBA
 static const uint32_t LIMITE_ENCENDIDO_MS = (uint32_t)APAGADO_AUTOMATICO_H * 3600000UL;
 static uint32_t tEncendido = 0;              // inicio del ciclo de encendido
 static bool     cortadoPorHoras = false;     // enclavamiento tras el corte
@@ -92,6 +92,7 @@ static void railLeds(bool encender) {
 // ---------------------------------------------------------------------------
 // Lectura del conmutador
 // ---------------------------------------------------------------------------
+#if !MODO_PRUEBA
 static bool contactoEstable() {
   static bool     estable   = false;
   static bool     ultima    = false;
@@ -111,8 +112,13 @@ static bool contactoEstable() {
   return estable;
 }
 
+#endif  // !MODO_PRUEBA
+
 static bool seQuiereEncendida() {
-#if MODO_CONMUTADOR == 0
+#if MODO_PRUEBA
+  // Modo de prueba: nadie pregunta al conmutador, la obra se enciende sola.
+  return true;
+#elif MODO_CONMUTADOR == 0
   // Interruptor enclavado: su posición es directamente el estado deseado.
   return contactoEstable();
 #else
@@ -294,7 +300,7 @@ void loop() {
 
   bool quiere = seQuiereEncendida();
 
-#if APAGADO_AUTOMATICO_H > 0
+#if APAGADO_AUTOMATICO_H > 0 && !MODO_PRUEBA
   // Pasar el conmutador por OFF rearma el temporizador.
   if (!quiere) {
     cortadoPorHoras = false;
@@ -314,7 +320,7 @@ void loop() {
 #endif
     iniciarTransicion(255, FADE_IN_MS);
     estado = ENCENDIENDO;
-#if APAGADO_AUTOMATICO_H > 0
+#if APAGADO_AUTOMATICO_H > 0 && !MODO_PRUEBA
     tEncendido = millis();
 #endif
     Serial.println(F("[obra] fundido de entrada"));

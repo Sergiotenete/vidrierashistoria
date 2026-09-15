@@ -8,6 +8,18 @@
 #pragma once
 
 // ---------------------------------------------------------------------------
+// 0. MODO DE PRUEBA
+// ---------------------------------------------------------------------------
+// 1 = la obra se enciende sola al arrancar y se queda encendida, ignorando el
+//     conmutador. Sirve para probar la tira antes de tener el conmutador
+//     cableado: al dar tensión hace su fundido de entrada y se queda con el
+//     arcoíris, y así puedes ajustar brillo y saturación con la obra montada.
+// 0 = funcionamiento normal: manda el conmutador.
+//
+// Acuérdate de volver a ponerlo a 0 cuando cablees el conmutador.
+#define MODO_PRUEBA           0
+
+// ---------------------------------------------------------------------------
 // 1. TIRA DE LED
 // ---------------------------------------------------------------------------
 #define NUM_LEDS              100      // número de WS2812B de la obra

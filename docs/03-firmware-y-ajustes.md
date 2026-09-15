@@ -48,6 +48,20 @@ La consola informa de cada transición:
 [obra] apagada
 ```
 
+### Qué placa seleccionar
+
+Mira lo impreso en la chapa metálica del módulo:
+
+| Lo que pone | Placa en el IDE | ¿Sirven los pines de este proyecto? |
+|---|---|---|
+| `ESP32` a secas, `ESP32-WROOM-32`, `ISM 2.4G` | **ESP32 Dev Module** | **Sí** |
+| `ESP32-S3-...` | ESP32S3 Dev Module | No: los GPIO 26-32 son de la flash interna |
+| `ESP32-C3-...` | ESP32C3 Dev Module | No: solo hay GPIO 0-10 y 18-21 |
+
+`ISM 2.4G` no es un modelo, es la banda de radio; aparece en chapas de módulos
+clónicos del ESP32 clásico. Al subir, la salida del IDE confirma el chip con una línea
+`Chip is ESP32-...`.
+
 ### Con el IDE de Arduino
 
 1. Instala el soporte para ESP32 (*Gestor de tarjetas* → `esp32` de Espressif).
@@ -80,6 +94,7 @@ Todo lo que se toca en obra está en un único fichero.
 
 | Parámetro | Por defecto | Notas |
 |---|---|---|
+| `MODO_PRUEBA` | `0` | `1` = la obra se enciende sola al arrancar e ignora el conmutador. Para probar la tira antes de tener el conmutador cableado |
 | `NUM_LEDS` | `100` | Si cambias la tira, cambia también el presupuesto de potencia |
 | `PIN_DATOS` | `13` | Evita GPIO 0, 2, 5, 12 y 15: son *strapping pins* |
 | `PIN_CONMUTADOR` | `27` | Con *pull-up* interno; el otro polo del conmutador a GND |
@@ -117,3 +132,5 @@ Todo lo que se toca en obra está en un único fichero.
 | Con `MODO_REPOSO 2`, la obra se enciende sola de vez en cuando | Ruido en el cable del conmutador despertando al ESP32 | Pull-up externo de 10 kΩ + 100 nF (doc 01, §5) |
 | El firmware no compila: «debe ser un GPIO del dominio RTC» | Deep sleep con un pin de conmutador sin dominio RTC | Usa 0, 2, 4, 12-15, 25-27 o 32-39 |
 | La obra se apagó sola y no responde al conmutador | `APAGADO_AUTOMATICO_H` ha llegado a su límite | Es lo esperado: pasa el conmutador por OFF y vuelve a ON |
+| La obra ignora el conmutador y está siempre encendida | `MODO_PRUEBA` se quedó a `1` | Ponlo a `0` y vuelve a subir |
+| Cada constante da «was not declared in this scope» al compilar | El `config.h` del proyecto no está en la carpeta y el compilador ha cogido otro del núcleo del ESP32 | Usa la versión de fichero único, o comprueba que no se descargó como `config.h.txt` |
