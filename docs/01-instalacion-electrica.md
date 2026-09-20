@@ -88,7 +88,7 @@ Enchufa la fuente, conecta solo el latiguillo y mide entre el hilo rojo y el neg
 | 2 | Conector rápido de palanca (WAGO 221) | 3 o 5 huecos. Uno para los rojos, otro para los negros |
 | 1 | Conmutador basculante o de palanca, 1 circuito (SPST) | **De señal, no de red** — ver §5 |
 | 1 | Resistencia 220-470 Ω, 1/4 W | En serie con la línea de datos. 330 Ω es el valor típico, pero vale cualquiera del rango |
-| 1 | Condensador electrolítico 220-470 µF / 16 V | En la entrada de la tira. **No 1000 µF**: ver §3 |
+| 1 | Condensador electrolítico **220 µF** / 16 V | En la entrada de la tira. Valor verificado en el montaje. **No 1000 µF**: ver §3 |
 | 1 | Condensador cerámico 100 nF | Junto a la alimentación del ESP32 |
 | 1 | Adaptador de nivel 74AHCT125 (o SN74HCT245) | Recomendado — ver §4. Alimentado a 5 V |
 | 1 | Condensador cerámico 100 nF (C4) | Entre las patillas 14 y 7 de U1 |
@@ -155,7 +155,7 @@ Reglas que no se negocian:
    la polaridad. Hace de reserva local de energía frente a los picos de consumo de la
    tira.
 
-   **Por qué 470 µF y no los 1000 µF de costumbre.** La cifra de 1000 µF es la
+   **Por qué no los 1000 µF de costumbre.** La cifra de 1000 µF es la
    recomendación habitual para tiras de LED, y está pensada para absorber el golpe de
    encender cien LED de golpe. **Esta instalación no hace eso**: el firmware sube el
    brillo progresivamente durante 3 segundos, así que no hay escalón de corriente que
@@ -166,7 +166,10 @@ Reglas que no se negocian:
    lo interpreta como un fallo y **corta la salida**. Con una fuente de 10 A no pasaría;
    con ésta, sí. Con 220-470 µF el problema desaparece y la función es la misma.
 
-   Si aun así quieres usar uno de 1000 µF, conéctalo **siempre con la fuente
+   **Verificado en el montaje real:** con 1000 µF la fuente corta y no arranca nada; con
+   **220 µF funciona sin problema**. Ése es el valor que lleva la instalación.
+
+   Si en algún momento quieres usar uno de 1000 µF, conéctalo **siempre con la fuente
    desenchufada** y da tensión después: así la fuente lo carga con su propia rampa de
    arranque en vez de encontrárselo de golpe. Lo que no puede hacerse es pincharlo con el
    montaje ya encendido.
