@@ -51,7 +51,7 @@ ambiente.
 
 **Y el corte tiene un coste:** un componente más, es decir un punto de fallo más. Si lo
 haces, usa un **MOSFET de canal P de lado alto con arranque suave**, no un relé
-mecánico: no tiene contactos que picarse al cerrar sobre el condensador de 1000 µF, no
+mecánico: no tiene contactos que picarse al cerrar sobre el condensador de entrada, no
 se puede quedar pegado y no hace clic. Juega a favor que el firmware nunca conmuta a
 plena carga — da tensión con la tira aún en negro y corta cuando el fundido ya ha
 terminado, así que el dispositivo nunca ve los 6 A.
@@ -162,7 +162,7 @@ El primer LED de la tira es el que más muere, y casi siempre por lo mismo: reci
 de datos cuando la tira no está alimentada, o antes que la alimentación. La corriente
 entra por los diodos de protección de la entrada.
 
-Ya está cubierto: **330 Ω en serie** con la línea de datos, **1000 µF** en la entrada de
+Ya está cubierto: **una resistencia en serie** con la línea de datos, **el condensador** en la entrada de
 la tira, espera de estabilización al arrancar, y si activas el corte del raíl, el
 firmware **deja el pin de datos en alta impedancia** mientras la tira está sin tensión.
 

@@ -42,7 +42,7 @@ Cuatro cosas, y ninguna toca a las demás salvo por las regletas:
    por su **puerto USB-C**, con un latiguillo macho que sale de los conectores rápidos;
    de sus pines solo salen dos cables de señal, `GPIO 13` y `GPIO 27`.
 
-**C1** (1000 µF) es la excepción: va en el otro extremo, junto a la regleta de salida
+**C1** (220-470 µF) es la excepción: va en el otro extremo, junto a la regleta de salida
 **J1**, lo más cerca posible de donde arranca la tira.
 
 ---
